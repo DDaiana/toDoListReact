@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-export default function TodoForm() {
-    const [inputText, setInputText] = useState(''); 
-    // note first element in the array is a variable, and the second element is used to update the element
-    const [submitValue, setSubmitValue] = useState('');
+
+export default function TodoForm({inputText, setInputText, setTodos, todos}) {
   
     function handleInputText(e) {
       setInputText(e.target.value);
@@ -11,7 +9,9 @@ export default function TodoForm() {
   
     function handleSubmit(e) {
       e.preventDefault(); //stops the page from refreshing
-      setSubmitValue(inputText);
+      setTodos([ ...todos,
+        {text: inputText, completed: false, id: Math.random() * 100}
+      ])
       setInputText('');
     }
 
